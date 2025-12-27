@@ -1,0 +1,30 @@
+:host ::ng-deep .gridlines table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+:host ::ng-deep .gridlines th,
+:host ::ng-deep .gridlines td {
+	border: 1px solid rgba(0, 0, 0, 0.12) !important;
+	padding: 0.5rem;
+}
+
+:host ::ng-deep .gridlines thead > tr > th {
+	background: transparent;
+}
+
+:host ::ng-deep .gridlines .p-table-tbody > tr > td,
+:host ::ng-deep .gridlines .p-table-thead > tr > th {
+	border: 1px solid rgba(0, 0, 0, 0.12) !important;
+}
+
+/* Ensure expanded row inner table also shows full grid */
+:host ::ng-deep .gridlines .p-datatable-table {
+	border-collapse: collapse;
+}
+
+/* Optional: slightly darker header border */
+:host ::ng-deep .gridlines thead th {
+	border-bottom: 1px solid rgba(0,0,0,0.18) !important;
+}
+
