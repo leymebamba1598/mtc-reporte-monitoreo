@@ -36,8 +36,8 @@ export class ReporteTabla {
         rating: 4,
         inventoryStatus: 'INSTOCK',
         orders: [
-          { id: 1, customer: 'David', date: '2025-12-20', amount: 30, status: 'DELIVERED' },
-          { id: 2, customer: 'Monica', date: '2025-12-21', amount: 35, status: 'PENDING' },
+          { id: 1, mes: 'Enero', date: '2025-12-20', amount: 30, status: 'DELIVERED' },
+          { id: 2, mes: 'Febrero', date: '2025-12-21', amount: 35, status: 'PENDING' },
         ],
       },
       {
@@ -52,16 +52,6 @@ export class ReporteTabla {
           { id: 3, customer: 'Alice', date: '2025-12-18', amount: 15, status: 'DELIVERED' },
         ],
       },
-      {
-        id: 1002,
-        name: 'Smart Speaker',
-        image: 'smart-speaker.jpg',
-        price: 150,
-        category: 'Electronics',
-        rating: 5,
-        inventoryStatus: 'OUTOFSTOCK',
-        orders: [],
-      },
     ];
   }
 
@@ -70,22 +60,22 @@ export class ReporteTabla {
     for (const p of this.products) {
       this.expandedRows[p.id] = true;
     }
-    this.messageService.add({ severity: 'info', summary: 'Expanded', detail: 'All rows expanded' });
+    // this.messageService.add({ severity: 'info', summary: 'Expanded', detail: 'All rows expanded' });
   }
 
   collapseAll() {
     this.expandedRows = {};
-    this.messageService.add({ severity: 'info', summary: 'Collapsed', detail: 'All rows collapsed' });
+    // this.messageService.add({ severity: 'info', summary: 'Collapsed', detail: 'All rows collapsed' });
   }
 
   onRowExpand(event: any) {
     const name = event.data?.name ?? 'Item';
-    this.messageService.add({ severity: 'info', summary: 'Row Expanded', detail: name });
+    // this.messageService.add({ severity: 'info', summary: 'Row Expanded', detail: name });
   }
 
   onRowCollapse(event: any) {
     const name = event.data?.name ?? 'Item';
-    this.messageService.add({ severity: 'info', summary: 'Row Collapsed', detail: name });
+    // this.messageService.add({ severity: 'info', summary: 'Row Collapsed', detail: name });
   }
 
   getSeverity(status: string) {

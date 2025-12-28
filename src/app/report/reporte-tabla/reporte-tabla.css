@@ -18,6 +18,10 @@
 	border: 1px solid rgba(0, 0, 0, 0.12) !important;
 }
 
+.text-center {
+	text-align: center !important;
+}
+
 /* Ensure expanded row inner table also shows full grid */
 :host ::ng-deep .gridlines .p-datatable-table {
 	border-collapse: collapse;
