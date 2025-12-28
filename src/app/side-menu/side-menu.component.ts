@@ -20,35 +20,32 @@ interface MenuItem {
 })
 export class SideMenuComponent {
     menuItems: MenuItem[] = [
-        // {
-        //   label: 'Resumen General de Predios',
-        //   icon: 'pi pi-gauge',
-        //   route: '/resumen-predios'
-        // },
         {
-            label: 'Principales reportes',
+          label: 'Resumen General de Predios',
+          icon: 'pi pi-gauge',
+          route: '/resumen-predios'
+        },
+        {
+            label: 'Principales reportes    ',
             icon: 'pi pi-stop-circle',
             expanded: true,
             children: [
                 { label: 'Programación Predios Física y Financiera 2026', icon: '', route: '/reporte-tabla' }, // Linking to existing route
                 { label: 'Otros reportes', icon: '', route: '/graficos-interferencias' },
-                // { label: 'Gráficos de Metas Financieras de Interferencias', icon: '', route: '/graficos-metas' },
+                { label: 'Gráficos', icon: '', route: '/graficos-metas' },
 
-                // { label: 'Convenios de Interferencias', icon: '', route: '/convenios' },
-                // { label: 'Listado de Estados de Interferencias', icon: '', route: '/listado-estados' },
-                // { label: 'Búsqueda de Profesionales', icon: '', route: '/busqueda-profesionales' }
             ]
         },
-        // {
-        //   label: 'Ejecución Presupuestal',
-        //   icon: 'pi pi-chart-line',
-        //   route: '/ejecucion-presupuestal'
-        // },
-        // {
-        //   label: 'Tenencia de Terceros',
-        //   icon: 'pi pi-desktop',
-        //   route: '/tenencia-terceros'
-        // }
+        {
+          label: 'Ejecución Presupuestal',
+          icon: 'pi pi-chart-line',
+          route: '/ejecucion-presupuestal'
+        },
+        {
+          label: 'Tenencia de Terceros',
+          icon: 'pi pi-desktop',
+          route: '/tenencia-terceros'
+        }
     ];
 
     toggleMenu(item: MenuItem) {
