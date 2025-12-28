@@ -26,10 +26,10 @@ export class ReporteTabla implements OnInit {
   constructor(private messageService: MessageService, private http: HttpClient, private cd: ChangeDetectorRef) {}
 
   ngOnInit() {
-    this.loadProducts();
+    this.loadPrediosReport();
   }
 
-    loadProductsTable() {
+    loadPrediosReportTable() {
     this.products = [
       {
         id: 1000,
@@ -56,10 +56,10 @@ export class ReporteTabla implements OnInit {
     ];
   }
 
-  loadProducts() {
+  loadPrediosReport() {
+    // poner aqui ruta del backend desplegado
     this.http.get<any[]>('http://localhost:3020/reporte/resumen/predios').subscribe({
       next: (data: any) => {
-        // console.log('Datos crudos', data);
         this.products = this.formatData(data?.respuesta || []);
         this.cd.detectChanges();
       },
