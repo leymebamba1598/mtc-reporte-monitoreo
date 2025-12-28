@@ -59,7 +59,7 @@ export class ReporteTabla implements OnInit {
   loadProducts() {
     this.http.get<any[]>('http://localhost:3020/reporte/resumen/predios').subscribe({
       next: (data: any) => {
-        console.log('Datos crudos', data);
+        // console.log('Datos crudos', data);
         this.products = this.formatData(data?.respuesta || []);
         this.cd.detectChanges();
       },

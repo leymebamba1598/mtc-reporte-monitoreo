@@ -32,3 +32,58 @@
 	border-bottom: 1px solid rgba(0,0,0,0.18) !important;
 }
 
+/* Card Styles */
+.card-container {
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 1px -1px rgba(0,0,0,0.2), 0 1px 1px 0 rgba(0,0,0,0.14), 0 1px 3px 0 rgba(0,0,0,0.12);
+    margin-bottom: 2rem;
+    overflow: hidden;
+    border: 1px solid #e0e0e0;
+}
+
+.card-header {
+    background-color: #ef5350;
+    color: #fff;
+    padding: 0.75rem 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-title {
+    font-weight: 700;
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+
+.card-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.card-body {
+    padding: 1.25rem;
+}
+
+/* Button Customization */
+/* When styleClass is used on p-button, it applies to the button element itself usually, or the wrapper depending on version */
+:host ::ng-deep .btn-filtros {
+    background-color: #2196F3 !important;
+    border-color: #2196F3 !important;
+    color: #ffffff !important;
+}
+
+:host ::ng-deep .btn-expandir {
+    background-color: #4CAF50 !important;
+    border-color: #4CAF50 !important;
+    color: #ffffff !important;
+}
+
+:host ::ng-deep .btn-contraer {
+    background-color: #00BCD4 !important;
+    border-color: #00BCD4 !important;
+    color: #ffffff !important;
+}
+
+
