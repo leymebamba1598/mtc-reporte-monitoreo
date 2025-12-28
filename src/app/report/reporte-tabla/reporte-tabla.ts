@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { TagModule } from 'primeng/tag';
 import { RippleModule } from 'primeng/ripple';
 import { MessageService } from 'primeng/api';
+import { IReportItem } from './types/types';
 
 @Component({
   selector: 'app-reporte-tabla',
@@ -18,7 +19,7 @@ import { MessageService } from 'primeng/api';
   providers: [MessageService],
 })
 export class ReporteTabla {
-  products: any[] = [];
+  products: IReportItem[] = [];
   expandedRows: { [key: string]: boolean } = {};
 
   constructor(private messageService: MessageService) {
@@ -29,29 +30,26 @@ export class ReporteTabla {
     this.products = [
       {
         id: 1000,
-        name: 'Bamboo Watch',
-        image: 'bamboo-watch.jpg',
-        price: 65,
-        category: 'Accessories',
-        rating: 4,
-        inventoryStatus: 'INSTOCK',
+        name: 'CG VIAL 1',
+        enero: { cantidad: 0, valor: 0 },
+        febrero: { cantidad: 7, valor: 459626.36 },
+        marzo: { cantidad: 5, valor: 336814.52 },
         orders: [
-          { id: 1, mes: 'Enero', date: '2025-12-20', amount: 30, status: 'DELIVERED' },
-          { id: 2, mes: 'Febrero', date: '2025-12-21', amount: 35, status: 'PENDING' },
+          {
+            id: 'ADS',
+            enero: { cantidad: 0, valor: 0 },
+            febrero: { cantidad: 4, valor: 455049.18 },
+            marzo: { cantidad: 4, valor: 335813.76 },
+          },
+          {
+            id: 'RED VIAL 05',
+            enero: { cantidad: 0, valor: 0 },
+            febrero: { cantidad: 3, valor: 4577.18 },
+            marzo: { cantidad: 1, valor: 1000.76 },
+          },
         ],
       },
-      {
-        id: 1001,
-        name: 'Phone Case',
-        image: 'phone-case.jpg',
-        price: 15,
-        category: 'Accessories',
-        rating: 3,
-        inventoryStatus: 'LOWSTOCK',
-        orders: [
-          { id: 3, customer: 'Alice', date: '2025-12-18', amount: 15, status: 'DELIVERED' },
-        ],
-      },
+     
     ];
   }
 

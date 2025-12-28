@@ -20,12 +20,7 @@ interface MenuItem {
 })
 export class SideMenuComponent {
     menuItems: MenuItem[] = [
-        {
-          label: 'Resumen General de Predios',
-          icon: 'pi pi-gauge',
-          route: '/resumen-predios'
-        },
-        {
+          {
             label: 'Principales reportes    ',
             icon: 'pi pi-stop-circle',
             expanded: true,
@@ -37,15 +32,20 @@ export class SideMenuComponent {
             ]
         },
         {
-          label: 'Ejecución Presupuestal',
+          label: 'Reportes graficos',
+          icon: 'pi pi-gauge',
+          route: '/resumen-predios'
+        },
+        {
+          label: 'Otros Reportes',
           icon: 'pi pi-chart-line',
           route: '/ejecucion-presupuestal'
         },
-        {
-          label: 'Tenencia de Terceros',
-          icon: 'pi pi-desktop',
-          route: '/tenencia-terceros'
-        }
+        // {
+        //   label: 'Tenencia de Terceros',
+        //   icon: 'pi pi-desktop',
+        //   route: '/tenencia-terceros'
+        // }
     ];
 
     toggleMenu(item: MenuItem) {

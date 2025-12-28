@@ -8,7 +8,7 @@
 	</ng-template>
 	<ng-template #header>
 		<tr>
-			<th rowspan="2" style="width: 5rem"></th>
+			<th rowspan="2" style="width: 1rem"></th>
 			<th rowspan="2">Name</th>
 			<th colspan="2" class="text-center">Enero</th>
 			<th colspan="2" class="text-center">Febrero</th>
@@ -29,25 +29,25 @@
 				<p-button type="button" pRipple [pRowToggler]="product" text="true"  [rounded]="true" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></p-button>
 			</td>
 			<td>{{ product.name }}</td>
-			<td>0</td>
-			<td>{{ 0 | currency : 'USD' }}</td>
-			<td>0</td>
-			<td>{{ 0 | currency : 'USD' }}</td>
-			<td>0</td>
-			<td>{{ 0 | currency : 'USD' }}</td>
+			<td>{{ product.enero?.cantidad || 0 }}</td>
+			<td>{{ (product.enero?.valor || 0) | currency : 'USD' }}</td>
+			<td>{{ product.febrero?.cantidad || 0 }}</td>
+			<td>{{ (product.febrero?.valor || 0) | currency : 'USD' }}</td>
+			<td>{{ product.marzo?.cantidad || 0 }}</td>
+			<td>{{ (product.marzo?.valor || 0) | currency : 'USD' }}</td>
 		</tr>
 	</ng-template>
 	<ng-template #expandedrow let-product>
 		<tr>
 			<td colspan="8">
 				<div class="p-4">
-					<h5>Orders for {{ product.name }}</h5>
+					<h5>Lista de proyectos de {{ product.name }}</h5>
 					<p-table styleClass="gridlines" [value]="product.orders" dataKey="id">
 						<ng-template #header>
 							<tr>
 								<th rowspan="2" pSortableColumn="id">
 									<div class="flex items-center gap-2">
-										Id
+										Proyecto
 										<p-sortIcon field="price"></p-sortIcon>
 									</div>
 								</th>
@@ -68,12 +68,12 @@
 						<ng-template #body let-order>
 							<tr>
 								<td>{{ order.id }}</td>
-								<td>0</td>
-								<td>{{ 0 | currency : 'USD' }}</td>
-								<td>0</td>
-								<td>{{ 0 | currency : 'USD' }}</td>
-								<td>0</td>
-								<td>{{ 0 | currency : 'USD' }}</td>
+								<td>{{ order.enero?.cantidad || 0 }}</td>
+								<td>{{ (order.enero?.valor || 0) | currency : 'USD' }}</td>
+								<td>{{ order.febrero?.cantidad || 0 }}</td>
+								<td>{{ (order.febrero?.valor || 0) | currency : 'USD' }}</td>
+								<td>{{ order.marzo?.cantidad || 0 }}</td>
+								<td>{{ (order.marzo?.valor || 0) | currency : 'USD' }}</td>
 								<!-- <td><p-button type="button" icon="pi pi-search"></p-button></td> -->
 							</tr>
 						</ng-template>
