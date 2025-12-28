@@ -21,11 +21,11 @@ interface MenuItem {
 export class SideMenuComponent {
     menuItems: MenuItem[] = [
           {
-            label: 'Principales reportes    ',
+            label: 'Principales reportes',
             icon: 'pi pi-stop-circle',
             expanded: true,
             children: [
-                { label: 'Programación Predios Física y Financiera 2026', icon: '', route: '/reporte-tabla' }, // Linking to existing route
+                { label: 'Reporte programación Predios', icon: '', route: '/reporte-tabla' }, // Linking to existing route
                 { label: 'Otros reportes', icon: '', route: '/graficos-interferencias' },
                 { label: 'Gráficos', icon: '', route: '/graficos-metas' },
 

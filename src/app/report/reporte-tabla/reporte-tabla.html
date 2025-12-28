@@ -1,5 +1,6 @@
 <p-toast></p-toast>
-<p-table styleClass="gridlines" [value]="products" dataKey="id" [tableStyle]="{ 'min-width': '60rem' }" [expandedRowKeys]="expandedRows" (onRowExpand)="onRowExpand($event)" (onRowCollapse)="onRowCollapse($event)">
+<p-table styleClass="gridlines" [value]="products" dataKey="id" [tableStyle]="{ 'min-width': '60rem' }"
+	[expandedRowKeys]="expandedRows" (onRowExpand)="onRowExpand($event)" (onRowCollapse)="onRowCollapse($event)">
 	<ng-template #caption>
 		<div class="flex flex-wrap justify-end gap-2">
 			<p-button label="Expand All" icon="pi pi-plus" text (onClick)="expandAll()"></p-button>
@@ -9,10 +10,19 @@
 	<ng-template #header>
 		<tr>
 			<th rowspan="2" style="width: 1rem"></th>
-			<th rowspan="2">Name</th>
+			<th rowspan="2">Nombre</th>
 			<th colspan="2" class="text-center">Enero</th>
 			<th colspan="2" class="text-center">Febrero</th>
 			<th colspan="2" class="text-center">Marzo</th>
+			<th colspan="2" class="text-center">Abril</th>
+			<th colspan="2" class="text-center">Mayo</th>
+			<th colspan="2" class="text-center">Junio</th>
+			<th colspan="2" class="text-center">Julio</th>
+			<th colspan="2" class="text-center">Agosto</th>
+			<th colspan="2" class="text-center">Setiembre</th>
+			<th colspan="2" class="text-center">Octubre</th>
+			<th colspan="2" class="text-center">Noviembre</th>
+			<th colspan="2" class="text-center">Diciembre</th>
 		</tr>
 		<tr>
 			<th>Cantidad</th>
@@ -21,12 +31,32 @@
 			<th>Valor</th>
 			<th>Cantidad</th>
 			<th>Valor</th>
+			<th>Cantidad</th>
+			<th>Valor</th>
+			<th>Cantidad</th>
+			<th>Valor</th>
+			<th>Cantidad</th>
+			<th>Valor</th>
+			<th>Cantidad</th>
+			<th>Valor</th>
+			<th>Cantidad</th>
+			<th>Valor</th>
+			<th>Cantidad</th>
+			<th>Valor</th>
+			<th>Cantidad</th>
+			<th>Valor</th>
+			<th>Cantidad</th>
+			<th>Valor</th>
+			<th>Cantidad</th>
+			<th>Valor</th>
+
 		</tr>
 	</ng-template>
 	<ng-template #body let-product let-expanded="expanded">
 		<tr>
 			<td>
-				<p-button type="button" pRipple [pRowToggler]="product" text="true"  [rounded]="true" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></p-button>
+				<p-button type="button" pRipple [pRowToggler]="product" text="true" [rounded]="true"
+					[icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></p-button>
 			</td>
 			<td>{{ product.name }}</td>
 			<td>{{ product.enero?.cantidad || 0 }}</td>
@@ -35,56 +65,119 @@
 			<td>{{ (product.febrero?.valor || 0) | currency : 'USD' }}</td>
 			<td>{{ product.marzo?.cantidad || 0 }}</td>
 			<td>{{ (product.marzo?.valor || 0) | currency : 'USD' }}</td>
+			<td>{{ product.abril?.cantidad || 0 }}</td>
+			<td>{{ (product.abril?.valor || 0) | currency : 'USD' }}</td>
+			<td>{{ product.mayo?.cantidad || 0 }}</td>
+			<td>{{ (product.mayo?.valor || 0) | currency : 'USD' }}</td>
+			<td>{{ product.junio?.cantidad || 0 }}</td>
+			<td>{{ (product.junio?.valor || 0) | currency : 'USD' }}</td>
+			<td>{{ product.julio?.cantidad || 0 }}</td>
+			<td>{{ (product.julio?.valor || 0) | currency : 'USD' }}</td>
+			<td>{{ product.agosto?.cantidad || 0 }}</td>
+			<td>{{ (product.agosto?.valor || 0) | currency : 'USD' }}</td>
+			<td>{{ product.setiembre?.cantidad || 0 }}</td>
+			<td>{{ (product.setiembre?.valor || 0) | currency : 'USD' }}</td>
+			<td>{{ product.octubre?.cantidad || 0 }}</td>
+			<td>{{ (product.octubre?.valor || 0) | currency : 'USD' }}</td>
+			<td>{{ product.noviembre?.cantidad || 0 }}</td>
+			<td>{{ (product.noviembre?.valor || 0) | currency : 'USD' }}</td>
+			<td>{{ product.diciembre?.cantidad || 0 }}</td>
+			<td>{{ (product.diciembre?.valor || 0) | currency : 'USD' }}</td>
 		</tr>
 	</ng-template>
 	<ng-template #expandedrow let-product>
 		<tr>
-			<td colspan="8">
+			<td colspan="26">
 				<div class="p-4">
 					<h5>Lista de proyectos de {{ product.name }}</h5>
 					<p-table styleClass="gridlines" [value]="product.orders" dataKey="id">
 						<ng-template #header>
-							<tr>
-								<th rowspan="2" pSortableColumn="id">
-									<div class="flex items-center gap-2">
-										Proyecto
-										<p-sortIcon field="price"></p-sortIcon>
-									</div>
-								</th>
-								<th colspan="2" class="text-center">Enero</th>
-								<th colspan="2" class="text-center">Febrero</th>
-								<th colspan="2" class="text-center">Marzo</th>
-								<!-- <th rowspan="2" style="width: 4rem"></th> -->
-							</tr>
-							<tr>
-								<th class="text-center">Cantidad</th>
-								<th class="text-center">Valor</th>
-								<th class="text-center">Cantidad</th>
-								<th class="text-center">Valor</th>
-								<th class="text-center">Cantidad</th>
-								<th class="text-center">Valor</th>
-							</tr>
-						</ng-template>
-						<ng-template #body let-order>
-							<tr>
-								<td>{{ order.id }}</td>
-								<td>{{ order.enero?.cantidad || 0 }}</td>
-								<td>{{ (order.enero?.valor || 0) | currency : 'USD' }}</td>
-								<td>{{ order.febrero?.cantidad || 0 }}</td>
-								<td>{{ (order.febrero?.valor || 0) | currency : 'USD' }}</td>
-								<td>{{ order.marzo?.cantidad || 0 }}</td>
-								<td>{{ (order.marzo?.valor || 0) | currency : 'USD' }}</td>
-								<!-- <td><p-button type="button" icon="pi pi-search"></p-button></td> -->
-							</tr>
-						</ng-template>
-						<ng-template #emptymessage>
-							<tr>
-								<td colspan="8">There are no order for this product yet.</td>
-							</tr>
-						</ng-template>
-					</p-table>
+		<tr>
+			<th rowspan="2" pSortableColumn="id">
+				<div class="flex items-center gap-2">
+					Proyecto
+					<p-sortIcon field="price"></p-sortIcon>
 				</div>
-			</td>
+			</th>
+			<th colspan="2" class="text-center">Enero</th>
+			<th colspan="2" class="text-center">Febrero</th>
+			<th colspan="2" class="text-center">Marzo</th>
+			<th colspan="2" class="text-center">Abril</th>
+			<th colspan="2" class="text-center">Mayo</th>
+			<th colspan="2" class="text-center">Junio</th>
+			<th colspan="2" class="text-center">Julio</th>
+			<th colspan="2" class="text-center">Agosto</th>
+			<th colspan="2" class="text-center">Setiembre</th>
+			<th colspan="2" class="text-center">Octubre</th>
+			<th colspan="2" class="text-center">Noviembre</th>
+			<th colspan="2" class="text-center">Diciembre</th>
+			<!-- <th rowspan="2" style="width: 4rem"></th> -->
+		</tr>
+		<tr>
+			<th>Cantidad</th>
+			<th>Valor</th>
+			<th>Cantidad</th>
+			<th>Valor</th>
+			<th>Cantidad</th>
+			<th>Valor</th>
+			<th>Cantidad</th>
+			<th>Valor</th>
+			<th>Cantidad</th>
+			<th>Valor</th>
+			<th>Cantidad</th>
+			<th>Valor</th>
+			<th>Cantidad</th>
+			<th>Valor</th>
+			<th>Cantidad</th>
+			<th>Valor</th>
+			<th>Cantidad</th>
+			<th>Valor</th>
+			<th>Cantidad</th>
+			<th>Valor</th>
+			<th>Cantidad</th>
+			<th>Valor</th>
+			<th>Cantidad</th>
+			<th>Valor</th>
 		</tr>
 	</ng-template>
+	<ng-template #body let-order>
+		<tr>
+			<td>{{ order.id }}</td>
+			<td>{{ order.enero?.cantidad || 0 }}</td>
+			<td>{{ (order.enero?.valor || 0) | currency : 'USD' }}</td>
+			<td>{{ order.febrero?.cantidad || 0 }}</td>
+			<td>{{ (order.febrero?.valor || 0) | currency : 'USD' }}</td>
+			<td>{{ order.marzo?.cantidad || 0 }}</td>
+			<td>{{ (order.marzo?.valor || 0) | currency : 'USD' }}</td>
+			<td>{{ order.abril?.cantidad || 0 }}</td>
+			<td>{{ (order.abril?.valor || 0) | currency : 'USD' }}</td>
+			<td>{{ order.mayo?.cantidad || 0 }}</td>
+			<td>{{ (order.mayo?.valor || 0) | currency : 'USD' }}</td>
+			<td>{{ order.junio?.cantidad || 0 }}</td>
+			<td>{{ (order.junio?.valor || 0) | currency : 'USD' }}</td>
+			<td>{{ order.julio?.cantidad || 0 }}</td>
+			<td>{{ (order.julio?.valor || 0) | currency : 'USD' }}</td>
+			<td>{{ order.agosto?.cantidad || 0 }}</td>
+			<td>{{ (order.agosto?.valor || 0) | currency : 'USD' }}</td>
+			<td>{{ order.setiembre?.cantidad || 0 }}</td>
+			<td>{{ (order.setiembre?.valor || 0) | currency : 'USD' }}</td>
+			<td>{{ order.octubre?.cantidad || 0 }}</td>
+			<td>{{ (order.octubre?.valor || 0) | currency : 'USD' }}</td>
+			<td>{{ order.noviembre?.cantidad || 0 }}</td>
+			<td>{{ (order.noviembre?.valor || 0) | currency : 'USD' }}</td>
+			<td>{{ order.diciembre?.cantidad || 0 }}</td>
+			<td>{{ (order.diciembre?.valor || 0) | currency : 'USD' }}</td>
+			<!-- <td><p-button type="button" icon="pi pi-search"></p-button></td> -->
+		</tr>
+	</ng-template>
+	<ng-template #emptymessage>
+		<tr>
+			<td colspan="8">There are no order for this product yet.</td>
+		</tr>
+	</ng-template>
+</p-table>
+</div>
+</td>
+</tr>
+</ng-template>
 </p-table>

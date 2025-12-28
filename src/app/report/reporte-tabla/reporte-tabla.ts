@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
@@ -18,15 +19,17 @@ import { IReportItem } from './types/types';
   styleUrls: ['./reporte-tabla.css'],
   providers: [MessageService],
 })
-export class ReporteTabla {
+export class ReporteTabla implements OnInit {
   products: IReportItem[] = [];
   expandedRows: { [key: string]: boolean } = {};
 
-  constructor(private messageService: MessageService) {
+  constructor(private messageService: MessageService, private http: HttpClient, private cd: ChangeDetectorRef) {}
+
+  ngOnInit() {
     this.loadProducts();
   }
 
-  loadProducts() {
+    loadProductsTable() {
     this.products = [
       {
         id: 1000,
@@ -51,6 +54,84 @@ export class ReporteTabla {
       },
      
     ];
+  }
+
+  loadProducts() {
+    this.http.get<any[]>('http://localhost:3020/reporte/resumen/predios').subscribe({
+      next: (data: any) => {
+        console.log('Datos crudos', data);
+        this.products = this.formatData(data?.respuesta || []);
+        this.cd.detectChanges();
+      },
+      error: (error) => {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No se pudieron cargar los productos' });
+        console.error('Error loading products', error);
+      }
+    });
+  }
+
+  formatData(data: any[]): IReportItem[] {
+    const monthMap: { [key: string]: string } = {
+      'ENERO': 'enero', 'FEBRERO': 'febrero', 'MARZO': 'marzo', 'ABRIL': 'abril',
+      'MAYO': 'mayo', 'JUNIO': 'junio', 'JULIO': 'julio', 'AGOSTO': 'agosto',
+      'SETIEMBRE': 'septiembre', 'SEPTIEMBRE': 'septiembre', 'OCTUBRE': 'octubre',
+      'NOVIEMBRE': 'noviembre', 'DICIEMBRE': 'diciembre'
+    };
+
+    const cgMap = new Map<string, IReportItem>();
+
+    data.forEach((item, index) => {
+      const cgName = item.cg;
+      const projectName = item.proyecto;
+      const monthKey = monthMap[item.mes];
+
+      if (!monthKey) return;
+
+      const cantidad = parseFloat(item.cantidad_registros || '0');
+      const valor = parseFloat(item.total_valor_estimado || '0');
+
+      if (!cgMap.has(cgName)) {
+        cgMap.set(cgName, {
+          id: 1000 + index,
+          name: cgName,
+          orders: [],
+          enero: { cantidad: 0, valor: 0 }, febrero: { cantidad: 0, valor: 0 }, marzo: { cantidad: 0, valor: 0 },
+          abril: { cantidad: 0, valor: 0 }, mayo: { cantidad: 0, valor: 0 }, junio: { cantidad: 0, valor: 0 },
+          julio: { cantidad: 0, valor: 0 }, agosto: { cantidad: 0, valor: 0 }, septiembre: { cantidad: 0, valor: 0 },
+          octubre: { cantidad: 0, valor: 0 }, noviembre: { cantidad: 0, valor: 0 }, diciembre: { cantidad: 0, valor: 0 }
+        });
+      }
+
+      const cgEntry = cgMap.get(cgName)! as any;
+
+      //totales por CG
+      if (cgEntry[monthKey]) {
+        cgEntry[monthKey].cantidad += cantidad;
+        cgEntry[monthKey].valor += valor;
+      }
+
+      // proyectos por CG
+      let order = cgEntry.orders.find((o: any) => o.id === projectName);
+      if (!order) {
+        order = {
+          id: projectName,
+          enero: { cantidad: 0, valor: 0 }, febrero: { cantidad: 0, valor: 0 }, marzo: { cantidad: 0, valor: 0 },
+          abril: { cantidad: 0, valor: 0 }, mayo: { cantidad: 0, valor: 0 }, junio: { cantidad: 0, valor: 0 },
+          julio: { cantidad: 0, valor: 0 }, agosto: { cantidad: 0, valor: 0 }, septiembre: { cantidad: 0, valor: 0 },
+          octubre: { cantidad: 0, valor: 0 }, noviembre: { cantidad: 0, valor: 0 }, diciembre: { cantidad: 0, valor: 0 }
+        };
+        cgEntry.orders.push(order);
+      }
+
+      const orderAny = order as any;
+      //totales por proyecto
+      if (orderAny[monthKey]) {
+        orderAny[monthKey].cantidad += cantidad;
+        orderAny[monthKey].valor += valor;
+      }
+    });
+
+    return Array.from(cgMap.values());
   }
 
   expandAll() {
