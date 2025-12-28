@@ -1,12 +1,13 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ReporteTabla } from './report/reporte-tabla/reporte-tabla';
+import { SideMenuComponent } from './side-menu/side-menu.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, ReporteTabla],
+  imports: [RouterOutlet, SideMenuComponent, NavbarComponent],
   templateUrl: './app.html',
   styleUrls: ['./app.css']
 })

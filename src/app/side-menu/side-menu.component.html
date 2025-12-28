@@ -1,0 +1,37 @@
+<div class="side-menu">
+    <div class="logo-container">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT99H4ZykZDewl6HNEFLovBC2qn7O0kbMe61w&s" alt="MTC Logo" class="logo">
+        <h3>MTC Reportes</h3>
+    </div>
+    <nav class="nav-links">
+        <ng-container *ngFor="let item of menuItems">
+            <!-- Parent Item -->
+            <div class="nav-item-container" [class.expanded]="item.expanded">
+                <div class="nav-item parent" 
+                     [class.active-parent]="item.expanded"
+                     (click)="toggleMenu(item)"
+                     [routerLink]="item.children ? null : item.route"
+                     [routerLinkActive]="item.children ? '' : 'active'">
+                    <div class="nav-item-content">
+                        <i [class]="item.icon"></i>
+                        <span>{{ item.label }}</span>
+                    </div>
+                    <i class="pi" [ngClass]="item.expanded ? 'pi-chevron-down' : 'pi-chevron-right'"></i>
+                </div>
+
+                <!-- Children Items -->
+                <div class="sub-menu" *ngIf="item.children && item.expanded">
+                    <a *ngFor="let child of item.children" 
+                       [routerLink]="child.route" 
+                       routerLinkActive="active-child" 
+                       class="nav-item child">
+                        <span>{{ child.label }}</span>
+                    </a>
+                </div>
+            </div>
+        </ng-container>
+    </nav>
+    <div class="version-footer">
+        Versión 1.0
+    </div>
+</div>
